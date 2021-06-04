@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import com.demo.sampletest.R
 import com.demo.sampletest.data.model.UserInfo
 import com.demo.sampletest.databinding.FragmentUsersBinding
-import com.demo.sampletest.features.photos.UserPhotosFragment
+import com.demo.sampletest.features.album.UserPhotosFragment
 import com.demo.sampletest.utils.InjectorUtils
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber

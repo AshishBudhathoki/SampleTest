@@ -1,13 +1,11 @@
-package com.demo.sampletest.features.photos
+package com.demo.sampletest.features.album
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.demo.sampletest.data.model.UserInfo
 import com.demo.sampletest.data.model.UserPhotos
 import com.demo.sampletest.databinding.UserPhotosRecyclerItemBinding
-import com.demo.sampletest.features.users.UserAdapter
 import com.squareup.picasso.Picasso
 
 class PhotoAdapter(private val itemClickListener: OnItemClickListener) :
@@ -40,7 +38,7 @@ class PhotoAdapter(private val itemClickListener: OnItemClickListener) :
                 Picasso.get().load(userPhotos.thumbnailUrl).into(imageThumbnail);
                 itemView.setOnClickListener {
                     if (adapterPosition != -1) itemClickListener.onItemClicked(
-                        userPhotos.url,
+                        userPhotos,
                         itemView
                     )
                 }
@@ -54,6 +52,6 @@ class PhotoAdapter(private val itemClickListener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(userId: String, itemView: View)
+        fun onItemClicked(userPhotos: UserPhotos, itemView: View)
     }
 }

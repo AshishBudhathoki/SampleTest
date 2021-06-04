@@ -1,12 +1,14 @@
-package com.demo.sampletest.features.photos
+package com.demo.sampletest.features.album
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.demo.sampletest.R
 import com.demo.sampletest.data.model.UserPhotos
 import com.demo.sampletest.databinding.FragmentUserPhotosBinding
+import com.demo.sampletest.features.photo.UserPhotoFragment
 import com.demo.sampletest.utils.InjectorUtils
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
@@ -77,8 +79,23 @@ class UserPhotosFragment : Fragment(R.layout.fragment_user_photos),
         Timber.d("ROCKET ID: $userId")
     }
 
-    override fun onItemClicked(userId: String, itemView: View) {
+    override fun onItemClicked(photos: UserPhotos, itemView: View) {
+        val bundle = Bundle()
+        bundle.putString("PHOTO_ID", photos.id.toString())
+        bundle.putString("AlBUM_ID", userId.toString())
+        bundle.putString("PHOTO_URL", photos.thumbnailUrl)
+        bundle.putString("PHOTO_TITLE", photos.title)
 
+        val userPhotosFragment = UserPhotoFragment()
+        userPhotosFragment.arguments = bundle
+        requireActivity()!!.supportFragmentManager.beginTransaction()
+            .replace(
+                (requireView().parent as ViewGroup).id,
+                userPhotosFragment,
+                "USER_PHOTO_FRAGMENT"
+            )
+            .addToBackStack(null)
+            .commit()
     }
 
 }

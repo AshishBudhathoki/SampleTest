@@ -1,14 +1,11 @@
-package com.demo.sampletest.features.photos
+package com.demo.sampletest.features.album
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.demo.sampletest.data.model.UserInfo
 import com.demo.sampletest.data.model.UserPhotos
 import com.demo.sampletest.data.repository.PhotosRepository
-import com.demo.sampletest.data.repository.UsersRepository
-import com.demo.sampletest.utils.InjectorUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
