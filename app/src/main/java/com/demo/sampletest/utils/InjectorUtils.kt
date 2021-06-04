@@ -1,6 +1,7 @@
 package com.demo.sampletest.utils
 
 import com.demo.sampletest.api.ApiService
+import com.demo.sampletest.data.repository.PhotosRepository
 import com.demo.sampletest.data.repository.UsersRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,6 +29,12 @@ object InjectorUtils {
 
     fun provideUserRepository(): UsersRepository = UsersRepository(
         providesServiceApi(provideRetrofit())
+    )
+
+    fun providePhotosRepository(): PhotosRepository = PhotosRepository(
+        providesServiceApi(
+            provideRetrofit()
+        )
     )
 
 }

@@ -1,21 +1,22 @@
-package com.demo.sampletest.features.users
+package com.demo.sampletest.features.photos
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.demo.sampletest.R
-import com.demo.sampletest.data.model.UserInfo
-import com.demo.sampletest.databinding.FragmentUsersBinding
-import com.demo.sampletest.features.photos.UserPhotosFragment
+import com.demo.sampletest.data.model.UserPhotos
+import com.demo.sampletest.databinding.FragmentUserPhotosBinding
 import com.demo.sampletest.utils.InjectorUtils
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
+import kotlin.properties.Delegates
 
-class UsersFragment : Fragment(R.layout.fragment_users), UserAdapter.OnItemClickListener {
-    private lateinit var viewAdapter: UserAdapter
-    private lateinit var viewModel: UsersViewModel
+class UserPhotosFragment : Fragment(R.layout.fragment_user_photos),
+    PhotoAdapter.OnItemClickListener {
+    private lateinit var viewAdapter: PhotoAdapter
+    private var userId by Delegates.notNull<Int>()
+    private lateinit var viewModel: UserPhotosViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,30 +25,32 @@ class UsersFragment : Fragment(R.layout.fragment_users), UserAdapter.OnItemClick
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentUsersBinding.bind(view)
-
-        viewModel = UsersViewModel(InjectorUtils.provideUserRepository())
+        viewModel = UserPhotosViewModel(InjectorUtils.providePhotosRepository())
+        val binding = FragmentUserPhotosBinding.bind(view)
         // Setup recyclerView
-        viewAdapter = UserAdapter(this)
+        viewAdapter = PhotoAdapter(this)
         binding.apply {
             recyclerView.apply {
                 setHasFixedSize(true)
                 adapter = viewAdapter
             }
 
+            getDataFromUsersFragment()
+            binding.textAlbumId.text = userId.toString()
+            viewModel.getAllPhotos(userId)
             // ViewModel setup
-            viewModel.getAllUsers()
-                .observe(viewLifecycleOwner, Observer<List<UserInfo>> { launches ->
-                    Timber.d("DATA IS: $launches")
+            viewModel.getUserPhotos()
+                .observe(viewLifecycleOwner, Observer<List<UserPhotos>> { photos ->
+                    Timber.d("DATA IS: $photos")
                     when {
-                        launches.isEmpty() -> {
+                        photos.isEmpty() -> {
                             recyclerView.visibility = View.GONE
                             emptyState.visibility = View.VISIBLE
                         }
-                        launches != null -> {
+                        photos != null -> {
                             recyclerView.visibility = View.VISIBLE
                             emptyState.visibility = View.GONE
-                            viewAdapter.setData(launches)
+                            viewAdapter.setData(photos)
                         }
                     }
                 })
@@ -59,29 +62,23 @@ class UsersFragment : Fragment(R.layout.fragment_users), UserAdapter.OnItemClick
                         Snackbar.make(it1, text, Snackbar.LENGTH_LONG).setAction(
                             getString(R.string.snackbar_action_retry)
                         ) {
-                            viewModel.refreshAllUsers()
+                            viewModel.refreshAllPhotos()
                         }.show()
                     }
                     viewModel.onSnackbarShown()
                 }
             })
-            // Swipe to refresh
         }
     }
 
-    override fun onItemClicked(userId: Int, itemView: View) {
-        val bundle = Bundle()
-        bundle.putString("USER_ID", userId.toString())
-
-        val userPhotosFragment = UserPhotosFragment()
-        userPhotosFragment.arguments = bundle
-        requireActivity()!!.supportFragmentManager.beginTransaction()
-            .replace(
-                (requireView().parent as ViewGroup).id,
-                userPhotosFragment,
-                "USER_PHOTOS_FRAGMENT"
-            )
-            .addToBackStack(null)
-            .commit()
+    private fun getDataFromUsersFragment() {
+        val bundle: Bundle? = arguments
+        userId = bundle!!.get("USER_ID").toString().toInt()
+        Timber.d("ROCKET ID: $userId")
     }
+
+    override fun onItemClicked(userId: String, itemView: View) {
+
+    }
+
 }
