@@ -1,4 +1,4 @@
-package com.demo.sampletest.features
+package com.demo.sampletest.features.users
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

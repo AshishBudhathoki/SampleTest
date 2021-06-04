@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SampleTest</string>
+    <string name="empty_recycler">Looks like there\'s no data, pull down to refresh</string>
+    <string name="snackbar_action_retry">Retry</string>
 </resources>

@@ -3,6 +3,7 @@ package com.demo.sampletest.features
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.demo.sampletest.data.model.UserInfo
 import com.demo.sampletest.data.repository.UsersRepository
+import com.demo.sampletest.features.users.UsersViewModel
 import com.demo.sampletest.testUtils.getValue
 import com.demo.sampletest.testUtils.testUser1
 import com.demo.sampletest.testUtils.testUser2
