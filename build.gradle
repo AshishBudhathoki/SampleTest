@@ -21,7 +21,28 @@ allprojects {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-
+ext {
+    appcompat_version = '1.2.0'
+    core_ktx_version = "1.3.2"
+    constraint_layout_version = '2.0.4'
+    fragment_ktx_version = "1.3.4"
+    swipe_referesh_version = "1.1.0"
+    lifecycle_version = "2.2.0"
+    arch_version = "2.1.0"
+    retrofit_version = "2.9.0"
+    okHttp_logging_version = "4.2.1"
+    timber_version = '4.7.1'
+    material_version = "1.3.0"
+    coroutines_android_version = '1.4.2'
+    junit_version = '4.12'
+    google_truth_version = '1.0'
+    test_core_version = '1.2.0'
+    test_runner_version = '1.1.1'
+    test_rules_version = '1.1.1'
+    test_ext_junit_version = '1.1.1'
+    test_ext_truth_version = '1.2.0'
+    mockito_kotlin_version = '2.2.0'
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
