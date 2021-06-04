@@ -53,6 +53,9 @@ dependencies {
     // Timber
     implementation "com.jakewharton.timber:timber:$rootProject.timber_version"
 
+    //Picasso
+    implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"
+
     // SwipeRefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.swipe_referesh_version"
 
