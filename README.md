@@ -3,8 +3,6 @@
 * An Android app as the assignment to fetch the data from the given API. 
 * Designed with Repository Pattern and MVVM architectural pattern with Android Architecture Components.
 
-<a href="https://imgur.com/qvLcA1Y"><img src="https://i.imgur.com/qvLcA1Ym.mp4" title="source: imgur.com" /></a>
-
 ## Architecture
 The Application is built in MVVM Architecture.
 MVVM have 3 main component called Model — View — View Model. View component will show data and manage the user interactions, View Model will handle all request
