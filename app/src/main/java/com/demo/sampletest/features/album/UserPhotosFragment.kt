@@ -83,7 +83,7 @@ class UserPhotosFragment : Fragment(R.layout.fragment_user_photos),
         val bundle = Bundle()
         bundle.putString("PHOTO_ID", photos.id.toString())
         bundle.putString("AlBUM_ID", userId.toString())
-        bundle.putString("PHOTO_URL", photos.thumbnailUrl)
+        bundle.putString("PHOTO_URL", photos.url)
         bundle.putString("PHOTO_TITLE", photos.title)
 
         val userPhotosFragment = UserPhotoFragment()

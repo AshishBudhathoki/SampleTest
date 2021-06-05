@@ -17,7 +17,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_toEndOf="@id/image_thumbnail"
-        tools:text="Flight number: 85" />
+        tools:text="85" />
 
 
     <ImageView
